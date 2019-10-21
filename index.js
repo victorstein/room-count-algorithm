@@ -12,7 +12,7 @@ const roomFinder = (xAxis, yAxis, grid) => {
     allMaps,
     offices,
     rowInxdex
-  }, u) => {
+  }, u, i) => {
     if (index === xAxis) {
       rowInxdex++
       allMaps.push(currentMap)
@@ -27,7 +27,11 @@ const roomFinder = (xAxis, yAxis, grid) => {
         offices++
       }
     } else {
-      if (((u === 1 && !currentMap[index - 1]) && (u === 1 && !allMaps[rowInxdex][index]))) {
+      if ((
+        (u === 1 && !currentMap[index - 1]) &&
+        (u === 1 && !allMaps[rowInxdex][index]) &&
+        (u === 1 && !data[i + 1])
+      )) {
         offices++
       }
     }
@@ -44,9 +48,9 @@ const roomFinder = (xAxis, yAxis, grid) => {
   }).offices
 }
 
-const data = [[1, 1, 1, 1, 1],
-  [1, 1, 0, 0, 0],
+const data = [[1, 1, 0, 1, 1],
+  [1, 1, 0, 1, 1],
   [1, 0, 0, 1, 1],
-  [1, 0, 1, 0, 1]]
+  [0, 0, 1, 1, 1]]
 
 console.log(roomFinder(5, 4, data))
