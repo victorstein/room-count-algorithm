@@ -1,23 +1,52 @@
-function numOffices (grid) {
-  let offices = 0
+const roomFinder = (xAxis, yAxis, grid) => {
+  // combine all the arrays to avoid nested loops
+  const data = grid.reduce((x, u) => {
+    x.push(...u)
+    return x
+  }, [])
 
-  for (const [i, office] of grid.entries()) {
-    for (const [j] of office.entries()) {
-      let officeContinues = grid[i][j - 1] && grid[i][j]
-      if (i > 0) {
-        officeContinues = (grid[i][j - 1] && grid[i][j]) || (grid[i - 1][j] && grid[i][j])
-      }
-
-      if (grid[i][j] === 1 && !officeContinues) offices++
+  // use x axis to create maps
+  return data.reduce(({
+    index,
+    currentMap,
+    allMaps,
+    offices,
+    rowInxdex
+  }, u) => {
+    if (index === xAxis) {
+      rowInxdex++
+      allMaps.push(currentMap)
+      index = 0
+      currentMap = []
     }
-  }
 
-  return offices
-};
+    currentMap.push(u)
 
-const data = [[1, 1, 0, 0, 0],
+    if (allMaps.length === 0) {
+      if (u === 1 && !currentMap[index - 1]) {
+        offices++
+      }
+    } else {
+      if (((u === 1 && !currentMap[index - 1]) && (u === 1 && !allMaps[rowInxdex][index]))) {
+        offices++
+      }
+    }
+
+    index++
+
+    return { index, currentMap, allMaps, offices, rowInxdex }
+  }, {
+    currentMap: [],
+    index: 0,
+    rowInxdex: -1,
+    allMaps: [],
+    offices: 0
+  }).offices
+}
+
+const data = [[1, 1, 1, 1, 1],
   [1, 1, 0, 0, 0],
-  [0, 0, 0, 1, 1],
-  [0, 0, 0, 1, 1]]
+  [1, 0, 0, 1, 1],
+  [1, 0, 1, 0, 1]]
 
-console.log(numOffices(data))
+console.log(roomFinder(5, 4, data))
