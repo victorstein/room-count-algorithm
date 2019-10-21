@@ -1,6 +1,6 @@
 # Room delimiting algorithm
 
-This is an algorithm that I had to do in a test for Turim developers. Took me about an hour to finish but I think is elegant.
+This is an algorithm that I had to do in a test for Turin developers. Took me about an hour to finish but I think is elegant.
 
 ## What does it do?
 
@@ -42,7 +42,11 @@ const data = [[1, 1, 1, 1, 1],
 ```
 
 ## Final toughts
-I don't think that this algorith is bullet-proof it might have a bug or two or even cases that I didn't take into consideration. feel free to submit any PRs.
+The algorith is not thoroughly tested; nonetheless, it has proven to be able to handle the most akward layouts I've thrown at it.
+
+## Changelog
+* First commit included a version of the algorith that would fail to some akward layouts and the runtime was O(n²).
+* Second commit includes a more robust version of the algorithm that responds well to akward layouts and the runtime was improved to be O(n)
 
 ## Authors
 
