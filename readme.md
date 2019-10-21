@@ -47,6 +47,7 @@ The algorith is not thoroughly tested; nonetheless, it has proven to be able to 
 ## Changelog
 * First commit included a version of the algorith that would fail to some akward layouts and the runtime was O(n²).
 * Second commit includes a more robust version of the algorithm that responds well to akward layouts and the runtime was improved to be O(n)
+* Third commit 😅. Forgot to add the look ahead condition. This will ensure that upcoming values are not part of the same room.
 
 ## Authors
 
